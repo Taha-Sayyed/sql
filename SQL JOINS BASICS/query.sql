@@ -10,7 +10,7 @@ from customers;
 select * 
 from orders;
 
--- 2] Inner Joins
+-- 2] Inner Joins: Returns only Matching rows from both the table
 
 /*Query: Get all the customers along with their orders, but only for customers 
 who have placed an order */
@@ -20,6 +20,11 @@ select
 	customers.first_name,
 	orders.order_id,
 	orders.sales
+from customers
+inner join orders
+on id=customer_id;
+
+select *
 from customers
 inner join orders
 on id=customer_id;
@@ -35,29 +40,34 @@ inner join orders as o
 on c.id=o.customer_id;
 
 
--- 3] Left Joins
+-- 3] Left Joins: Returns all rows from left and only matching from right 
+
 --Query: Get all the customers along with their orders including those without orders
 
 select 
 	c.id,
-	o.order_id,
-	o.order_date,
 	c.first_name,
-	c.score
-	
+	o.order_id,
+	o.sales
 from customers as c   
 left join orders as o
 on c.id=o.customer_id
 
--- 4] Right Joins
+
+select *	
+from customers as c   
+left join orders as o
+on c.id=o.customer_id
+
+-- 4] Right Joins: Return all rows from the right and only matching rows from left
+
 --Query: Get all customers along with their orders, including orders without matching the customers
 
 select 
 	c.id,
-	o.order_id,
-	o.order_date,
 	c.first_name,
-	c.score
+	o.order_id,
+	o.sales
 from customers as c
 right join orders as o
 on c.id=o.customer_id
@@ -66,10 +76,9 @@ on c.id=o.customer_id
 
 select 
 	c.id,
-	o.order_id,
-	o.order_date,
 	c.first_name,
-	c.score
+	o.order_id,
+	o.sales
 from orders as o
 left join customers as c
 on o.customer_id=c.id
@@ -79,10 +88,9 @@ on o.customer_id=c.id
 
 select 
 	c.id,
-	o.order_id,
-	o.order_date,
 	c.first_name,
-	c.score
+	o.order_id,
+	o.sales
 from customers as c
 full join orders as o
 on c.id=o.customer_id
